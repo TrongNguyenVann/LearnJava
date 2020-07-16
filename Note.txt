@@ -1,0 +1,99 @@
+BASIC KNOWLEDGE 
+1. In java, any object created by new keyword exept primative data type
+2. Construct string from char array
+  ```java
+  String newString = new String(charArray);
+3. Utilities to work with java
+copy array: System.arraycopy()
+copy in range: java.util.Arrays.copyOfRange()
+binary search: java.util.Arrays.binarySearch()
+compare two arrays: java.util.Arrays.equals()
+fill specific value: java.util.Arrays.fill()
+Sorting: java.util.Arryas.sort() or parallelSort()
+4. Expression is a construct made up of variables, operators and method invocation, that evaluates to a single value.
+int cadence = 0;
+anArray[0] = 100;
+5. Statements are roughly equivalent to sentences in antural languages. A statement forms a unit of execution.
+There are expression statement, declaration statemnet and control flow statement.
+6. Recommend to use for range loop if possible
+7. break and continue has unlabeled and label version. We can use label break and continue to jump to a label
+
+CLASS AND OBJECT
+1. In Java, no need to include class to other source file. It will automatically detect
+2. When we define a public class, it require that the class name and file name must be match.
+3. One class can inherit only one super class and can implement many interface.
+3. Syntax
+```java
+[AccessModifier] class MyClass extends SuperClass implements MyInterface1,MyInterface2 {
+  // fields, constructors
+  // method declarations
+
+}
+
+Acess modifier: public, privated, protected used to determine what other classed can access MyClass.
+5. Different with C++, we need to define explicitly access modifier for each class fields
+public int speed;
+private int gear;
+6. Passing arbitrary number of Arguments
+Like C++, to passing an arbitrary number of arguments to a function. We use varags.
+Sytax:
+public Polygon polygonFrom(Point... corners) {
+  // Get number of sides
+  int numberOfSides = corners.length;
+  // Access vargs by index like normal array.
+}
+We can pass arguments to a vargs function using an array or seperated data.
+7. In Java, passing arugment to function is by value, so that we can not change
+the value of one variable inside a method. But if the argument is reference type (object), we can change the field of that object inside a method.
+8. In Java, they typically use directly instance operator to call to method:
+```java
+int height = new Rectangle().height;
+9. Access modifier
+At the top level: public or package-private (also called default)
+At member level: public, private, protected, package-private(default)
+
+Class level:
++ A class maybe declared with access public keyword, it is visible to all classed everywhere.
++ If a class has no access modifier, it is visible only within its own package.
+What is java package?
+
+Member level:
+private: access only by own class
+default: acess by own class and class inside package
+protected: access by own class, class inside package, subclass in other package
+public: access by own class, class inside package, subclass and class in other package
+
+10. class member syntax:
+Same with C++
+```java
+static int classVariable;
+```
+Call it by syntax:
+```java
+ClassName.classMember or ClassName.classMethod()
+
+11. Constants in java is defined in class scope only. You can't define constants in
+main() or any other methods.
+
+12. We can initialize static variable using:
++ Direct
++ Static initialization block:
+```java
+static {
+  // Code to initialization
+}
+```
++ Use a private static method to initialize. Ofcourse, we can re-use it.
+13. We can initialize instance members using:
++ Direct
++ Initizalizing Instance Members:
+```java
+{
+  // Code is needed for initialization
+}```
+Java will copy the instance initialization to each constructor. So this method is useful if we want to use that code block inside all constructor.
++ Use final method, because it cannot overridden in a subclass.
+```java
+protected final varType initializeInstanceVariable() {
+  // initialization code goes here
+}```
