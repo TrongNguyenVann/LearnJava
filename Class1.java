@@ -29,41 +29,30 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-public class Rectangle {
-    public int width = 0;
-    public int height = 0;
-    public Point origin;
+public class Class1 {
+    protected InnerClass1 ic;
 
-    // four constructors
-    public Rectangle() {
-	origin = new Point(0, 0);
-    }
-    public Rectangle(Point p) {
-	origin = p;
-    }
-    public Rectangle(int w, int h) {
-	origin = new Point(0, 0);
-	width = w;
-	height = h;
-    }
-    public Rectangle(Point p, int w, int h) {
-	origin = p;
-	width = w;
-	height = h;
+    public Class1() {
+	ic = new InnerClass1();
     }
 
-    // a method for moving the rectangle
-    public void move(int x, int y) {
-	origin.x = x;
-	origin.y = y;
+    public void displayStrings() {
+	System.out.println(ic.getString() + ".");
+	System.out.println(ic.getAnotherString() + ".");
     }
 
-    // a method for computing the area of the rectangle
-    public int getArea() {
-	return width * height;
+    static public void main(String[] args) {
+        Class1 c1 = new Class1();
+	c1.displayStrings();
     }
 
-    public int area() {
-  return width * height;
-  }
+    protected class InnerClass1 {
+	public String getString() {
+	    return "InnerClass1: getString invoked";
+	}
+
+	public String getAnotherString() {
+	    return "InnerClass1: getAnotherString invoked";
+	}
+    }
 }

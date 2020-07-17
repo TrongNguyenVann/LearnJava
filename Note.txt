@@ -97,3 +97,40 @@ Java will copy the instance initialization to each constructor. So this method i
 protected final varType initializeInstanceVariable() {
   // initialization code goes here
 }```
+14. Nested classed in java
++ A normal class inside one class is called inner class. It can acess
+any field of the outer class. And it's created by calling new method on
+one outer instance
+```java
+class OuterClass {
+  ...
+  class InnerClass {
+    ...
+  }
+  ...
+}
+
+Then to create an InnerClass instance
+OutterClass outter = new OutterClass();
+InnerClass inner = outter.new InnerClass();
+
++ A static class inside one class is called static nested class. 
+```java
+class OuterClass {
+  ...
+  static class InnerClass {
+    ...
+  }
+  ...
+}```
+
+15. enum
+```java
+public enum Planet {
+  MERCURY,
+  VENUS,
+  EARTH
+}```
+
+enum is extended from java.lang.Enum. Also it has some method like: values()
+
