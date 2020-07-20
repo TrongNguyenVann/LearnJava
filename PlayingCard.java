@@ -1,10 +1,19 @@
 import java.util.*;
 
 enum CardSuit {
-	HEART,
-	CLUB,
-	DIAMOND,
-	SPADE;
+	HEART(0),
+	CLUB(1),
+	DIAMOND(2),
+	SPADE(3);
+
+	private final int cardSuit;
+	CardSuit(int cardSuit) {
+		this.cardSuit = cardSuit;
+	}
+
+	public int getCardSuit() {
+		return cardSuit;
+	}
 
 	public static CardSuit castFromInt(int number) {
 		switch(number) {
@@ -22,39 +31,79 @@ enum CardSuit {
 	}
 }
 
+enum CardRank {
+	ACE(1),
+	TWO(2),
+	THREE(3),
+	FOUR(4),
+	FIVE(5),
+	SIX(6),
+	SEVEN(7),
+	EIGHT(8),
+	NINE(9),
+	TEN(10),
+	JACK(11),
+	QUEEN(12),
+	KING(13);
+
+	private final int cardRank;
+
+	CardRank(int cardRank) {
+		this.cardRank = cardRank;
+	}
+
+	public int getCardRank() {
+		return cardRank;
+	}
+
+	public static CardRank castFromInt(int cardRank) {
+		switch(cardRank) {
+			case 1:
+				return ACE;
+			case 2:
+				return TWO;
+			case 3:
+				return THREE;
+			case 4:
+				return FOUR;
+			case 5:
+				return FIVE;
+			case 6:
+				return SIX;
+			case 7:
+				return SEVEN;
+			case 8:
+				return EIGHT;
+			case 9:
+				return NINE;
+			case 10:
+				return TEN;
+			case 11:
+				return JACK;
+			case 12:
+				return QUEEN;
+			case 13:
+				return KING;
+			default:
+				return null;					
+		}
+	}
+}
+
 class PlayingCard {
 
-	int rank;
-	int suit;
-
-	static final int HEART_SUIT = 0;
-	static final int CLUB_SUIT = 1;
-	static final int DIAMOND_SUIT = 2;
-	static final int SPADE_SUIT = 3;
-
-	static final int ACE_RANK = 1;
-	static final int TWO_RANK = 2;
-	static final int THREE_RANK = 3;
-	static final int FOUR_RANK = 4;
-	static final int FIVE_RANK = 5;
-	static final int SIX_RANK = 6;
-	static final int SEVEN_RANK = 7;
-	static final int EIGHT_RANK = 8;
-	static final int NIGHT_RANK = 9;
-	static final int TEN_RANK = 10;
-	static final int JACK_RANK = 11;
-	static final int QUEEN_RANK = 12;
-	static final int KING_RANK = 13;
+	CardRank rank;
+	CardSuit suit;
 
 	private boolean isValidSuit(int suit) {
-		if (suit < HEART_SUIT || suit > SPADE_SUIT) {
+		if (suit < 0 || suit > 3) {
 			return false;
 		}
 		return true;
 	}
 
 	private boolean isValidRank(int rank) {
-		if (rank < ACE_RANK || rank > KING_RANK) {
+		if (rank < 1 || rank > 13) {
 			return false;
 		}
 		return true;
@@ -64,85 +113,35 @@ class PlayingCard {
 		// Create random rank in range [1 - 13], random suit
 		assert isValidSuit(suit);
 		assert isValidRank(rank);
-		this.suit = suit;
-		this.rank = rank;
+		this.suit = CardSuit.castFromInt(suit);
+		this.rank = CardRank.castFromInt(rank);
 	}
 
-	// Use method to convert number to string
-	String convertCardSuitToString(int cardSuit) {
-		switch (cardSuit) {
-			case 0:
-				return "Heart";
-			case 1:
-				return "Club";
-			case 2:
-				return "Diamond";
-			case 3:
-				return "Spade";
-			default:
-				return null;
-		}
-	}
-
-	// Use method to convert number to string
-	String convertCardRankToString(int cardRank) {
-		switch (cardRank) {
-			case 1:
-				return "Ace";
-			case 2:
-				return "Two";
-			case 3:
-				return "Three";
-			case 4:
-				return "Four";
-			case 5:
-				return "Five";
-			case 6:
-				return "Six";
-			case 7:
-				return "Seven";
-			case 8:
-				return "Ten";
-			case 9:
-				return "Eleven";
-			case 10:
-				return "Ten";
-			case 11:
-				return "Jack";
-			case 12:
-				return "Queen";
-			case 13:
-				return "King";
-			default:
-				return null;
-		}
-	}
-
-	private static HashMap<Integer, String> suitMap;
-	private static HashMap<Integer, String> rankMap;
+	private static HashMap<CardSuit, String> suitMap;
+	private static HashMap<CardRank, String> rankMap;
 	static {
 		// suit map static initialization
-		suitMap = new HashMap<Integer, String>();
-		suitMap.put(HEART_SUIT, "Heart");
-		suitMap.put(CLUB_SUIT, "Club");
-		suitMap.put(DIAMOND_SUIT, "Diamond");
-		suitMap.put(SPADE_SUIT, "Spade");
+		suitMap = new HashMap<CardSuit, String>();
+		suitMap.put(CardSuit.HEART, "Heart");
+		suitMap.put(CardSuit.CLUB, "Club");
+		suitMap.put(CardSuit.DIAMOND, "Diamond");
+		suitMap.put(CardSuit.SPADE, "Spade");
 
 		// rank map static initialization
-		rankMap = new HashMap<Integer, String>();
-		rankMap.put(ACE_RANK, "Ace");
-		rankMap.put(TWO_RANK, "Two");
-		rankMap.put(THREE_RANK, "Three");
-		rankMap.put(FOUR_RANK, "Four");
-		rankMap.put(FIVE_RANK, "Five");
-		rankMap.put(SIX_RANK, "Six");
-		rankMap.put(SEVEN_RANK, "Seven");
-		rankMap.put(EIGHT_RANK, "Eight");
-		rankMap.put(NIGHT_RANK, "Night");
-		rankMap.put(TEN_RANK, "Ten");
-		rankMap.put(JACK_RANK, "Jack");
-		rankMap.put(QUEEN_RANK, "Queen");
-		rankMap.put(KING_RANK, "King");
+		rankMap = new HashMap<CardRank, String>();
+		rankMap.put(CardRank.ACE, "Ace");
+		rankMap.put(CardRank.TWO, "Two");
+		rankMap.put(CardRank.THREE, "Three");
+		rankMap.put(CardRank.FOUR, "Four");
+		rankMap.put(CardRank.FIVE, "Five");
+		rankMap.put(CardRank.SIX, "Six");
+		rankMap.put(CardRank.SEVEN, "Seven");
+		rankMap.put(CardRank.EIGHT, "Eight");
+		rankMap.put(CardRank.NINE, "Nine");
+		rankMap.put(CardRank.TEN, "Ten");
+		rankMap.put(CardRank.JACK, "Jack");
+		rankMap.put(CardRank.QUEEN, "Queen");
+		rankMap.put(CardRank.KING, "King");
 	}
 
 	public void display() {

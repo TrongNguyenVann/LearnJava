@@ -8,8 +8,8 @@ class CardDeck {
 
   public CardDeck() {
     cards = new PlayingCard[NUM_SUITS][NUM_RANKS];
-    for (int i = PlayingCard.HEART_SUIT; i < NUM_SUITS; ++i) {
-      for (int j = PlayingCard.ACE_RANK; j <= NUM_RANKS; ++j) {
+    for (int i = 0; i < NUM_SUITS; ++i) {
+      for (int j = 1; j <= NUM_RANKS; ++j) {
         cards[i][j - 1] = new PlayingCard(i, j);
       }
     }

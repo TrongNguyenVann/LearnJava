@@ -134,3 +134,45 @@ public enum Planet {
 
 enum is extended from java.lang.Enum. Also it has some method like: values()
 
+ANNOTATION
+is a form of metadata, provide data about a program that is not part of the program itself. It has no direct effect on the operation.
+@Deprecated annotation indicates that the marked element is deprecated and should no longer be used. Compiler will generates a warning whenever a program useds a method, class or field with @Deprecated annotation.
+@Deprecated
+static void deprecatedMethod() {}
+
+@Override informs the compiler that the element is meant to override an element
+declared in a superclass.
+int overrideMethod() {}
+
+@SuppressWarnings tells the copiler to suppress specific warnings
+@SuppressWarnings("deprecation")
+void useDeprecatedMethod() {
+  objectOne.deprecatedMethod();
+}
+
+Java lists two warning categories: deprecation and unchecked. To suppress multiple categories of warnings, use the following syntax:
+@SuppressWarnings({"unchecked", "deprecation"})
+
+In addition, there are @SafeVargs and @FunctionalInterface annotations too.
+
+INTERFACE AND INHERITANCE
+An interface declaration consists of modifiers, the keyword interface, interface
+name, comma-separated list of parent interfaces (if any) and the interface body.
+
+public interface GroupedInterface extends Interface1, Interface2, Interface3 {
+
+  double E = 2.718;
+
+  // Method signatures
+  void doSomething(int i, double x);
+  int doSomethingElse();
+}
+
+All methods in an interface are implicitly public.
+All constant values in an interface are implicitly public, static and final.
+You can not create an instance of Interface type, same with C++ pure virtual class.
+When we want to add new method to old interface, we can:
+1. Create new interface that extend old interface, then add new method there
+2. Create static or default method with body
+
+Use instanceof operator to check the actual type of an object
