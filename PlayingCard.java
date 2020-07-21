@@ -1,18 +1,25 @@
 import java.util.*;
 
 enum CardSuit {
-	HEART(0),
-	CLUB(1),
-	DIAMOND(2),
-	SPADE(3);
+	HEART(0, "Heart"),
+	CLUB(1, "Club"),
+	DIAMOND(2, "Diamond"),
+	SPADE(3, "Spade");
 
 	private final int cardSuit;
-	CardSuit(int cardSuit) {
+	private final String cardSuitString;
+
+	CardSuit(int cardSuit, String cardSuitString) {
 		this.cardSuit = cardSuit;
+		this.cardSuitString = cardSuitString;
 	}
 
 	public int getCardSuit() {
 		return cardSuit;
+	}
+
+	public String getCardSuitString() {
+		return cardSuitString;
 	}
 
 	public static CardSuit castFromInt(int number) {
@@ -32,28 +39,34 @@ enum CardSuit {
 }
 
 enum CardRank {
-	ACE(1),
-	TWO(2),
-	THREE(3),
-	FOUR(4),
-	FIVE(5),
-	SIX(6),
-	SEVEN(7),
-	EIGHT(8),
-	NINE(9),
-	TEN(10),
-	JACK(11),
-	QUEEN(12),
-	KING(13);
+	ACE(1, "Ace"),
+	TWO(2, "Two"),
+	THREE(3, "Three"),
+	FOUR(4, "Four"),
+	FIVE(5, "Five"),
+	SIX(6, "Six"),
+	SEVEN(7, "Seven"),
+	EIGHT(8, "Eight"),
+	NINE(9, "Nine"),
+	TEN(10, "Ten"),
+	JACK(11, "Jack"),
+	QUEEN(12, "Queen"),
+	KING(13, "King");
 
 	private final int cardRank;
+	private final String cardRankString;
 
-	CardRank(int cardRank) {
+	CardRank(int cardRank, String cardRankString) {
 		this.cardRank = cardRank;
+		this.cardRankString = cardRankString;
 	}
 
 	public int getCardRank() {
 		return cardRank;
+	}
+
+	public String getCardRankString() {
+		return cardRankString;
 	}
 
 	public static CardRank castFromInt(int cardRank) {
@@ -117,35 +130,22 @@ class PlayingCard {
 		this.rank = CardRank.castFromInt(rank);
 	}
 
-	private static HashMap<CardSuit, String> suitMap;
-	private static HashMap<CardRank, String> rankMap;
-	static {
-		// suit map static initialization
-		suitMap = new HashMap<CardSuit, String>();
-		suitMap.put(CardSuit.HEART, "Heart");
-		suitMap.put(CardSuit.CLUB, "Club");
-		suitMap.put(CardSuit.DIAMOND, "Diamond");
-		suitMap.put(CardSuit.SPADE, "Spade");
-
-		// rank map static initialization
-		rankMap = new HashMap<CardRank, String>();
-		rankMap.put(CardRank.ACE, "Ace");
-		rankMap.put(CardRank.TWO, "Two");
-		rankMap.put(CardRank.THREE, "Three");
-		rankMap.put(CardRank.FOUR, "Four");
-		rankMap.put(CardRank.FIVE, "Five");
-		rankMap.put(CardRank.SIX, "Six");
-		rankMap.put(CardRank.SEVEN, "Seven");
-		rankMap.put(CardRank.EIGHT, "Eight");
-		rankMap.put(CardRank.NINE, "Nine");
-		rankMap.put(CardRank.TEN, "Ten");
-		rankMap.put(CardRank.JACK, "Jack");
-		rankMap.put(CardRank.QUEEN, "Queen");
-		rankMap.put(CardRank.KING, "King");
+	@Override
+	public String toString() {
+		String res = "PlayingCard with rank " +  rank.getCardRankString() +
+			           " of suit: " + suit.getCardSuitString();
+		return res;
 	}
 
-	public void display() {
-		System.out.println("Rank: " + rankMap.get(rank) + 
-			                 ", Suit: " + suitMap.get(suit));
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof PlayingCard) {
+			PlayingCard otherPlayingCard = (PlayingCard)obj;
+			if (otherPlayingCard.rank.getCardRank() == rank.getCardRank() &&
+				  otherPlayingCard.suit.getCardSuit() == suit.getCardSuit()) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -176,3 +176,84 @@ When we want to add new method to old interface, we can:
 2. Create static or default method with body
 
 Use instanceof operator to check the actual type of an object
+
+classes can have fields whereas interfaces can not.
+OVERRIDING AND HIDING METHODS
+An instance method in a subclass with the same signature (return, name, parameter type) as an instance method in superclass overrides the superclass's method.
+We should add @Override annotation to help the compiler.
+
+If a subclass defines a static method with the same signature as a static method in the superclass, then the method in the subclass hides the one in the superclass.
+
+Use keyword super to call methods or fields of superclass that is hidden or overrid.
+
+Similar with C++ operator overloading, we should override Object method to clone
+or compare... between object
+protected Object clone() throws CloneNotSupportedException from Cloneable interface
+public boolean equals(Object obj) {
+  if (obj isinstanceof Book) {
+    return ISBN.equals((Book)obj.getISBN());
+  }
+  return false;
+}
+
+You should always override equals() method and override hashCode() as well
+finalize() is override to free the resource
+getClass() used to get information about class such as class name, superclas name, interface name
+hashCode() is the object's hash code, wich is the object's memory address
+toString() returns a String represent for the object
+
+final class do not have any subclass
+final method do not allowed to override
+Method called from constructors should generally be declared final.
+
+ABSTRACT CLASS AND METHOD
+abstract class is a class that is declared with abstract keyword. It may or
+may not include abstract methods. Abstract classed cannot be instantiated.
+abstract method is a method that is declared without an implementation. If
+a class contains abstract method, then the class itself must be declared abstract
+```java
+public abstract class GraphicObject {
+  // declare fields
+  // declare nonabstract methods
+  abstract void draw();
+}```
+
+Note that methods in an interface that are not default or static are implicitly abstract. So that, it is unnecessary to declare them abstract.
+
+Which should you use, abstract classes or interfaces?
+. Consider using abstract classes in the following situation:
+  + You want to share code among several closely related classes.
+  + You expect that classes that extend your abstract class have many common
+method or fields, or require access modifiers other than public
+  + You want to declare non-static or non-final fields. 
+
+. Consider using interfaces in the following situation:
+  + You expect that unrelated classes would implement your interface
+  + You want to specify the behavior of a partiular data type, but not
+concern about who implements its behavior
+  + You want to take advantage of multiple inheritance of type
+
+PACKAGES
+Package is a grouping of related types providing access protection and name
+space management.
+We should bundle classes and interface in a package in the following situation:
+. You and other programmers can easily determine that these types are related
+. You and other programmers know where to find types that can provide
+provide graphics-related functions.
+.The name of your types won't conflict with the type names in other packages because the package creates a new namespace
+. You can allow types within package to have unrestricted access and restrict access for types outside the package.
+
+Syntax:
+Add ```package package_name``` at the top of every source file that you
+want to include in the package.
+Package name often named in the inversed order of company host name
+com.google.FaceRecognition
+org.microsoft.MSOffice
+
+To use a type in a package, we should call its package name, follow its name
+Ex:
+graphics.Rectangle myRect = new graphics.Rectangle();
+
+To use the shortcut name, we need to import keyword
+
+  
